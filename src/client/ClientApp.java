@@ -17,5 +17,6 @@ public class ClientApp {
 		view.setLocationRelativeTo(null);
 		view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		view.setVisible(true);
+		System.out.println("Test");
 	}
 }
