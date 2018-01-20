@@ -1,7 +1,5 @@
 package client;
-
-//Blah
-
+//TEST for Fetch!!
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -17,6 +15,5 @@ public class ClientApp {
 		view.setLocationRelativeTo(null);
 		view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		view.setVisible(true);
-		System.out.println("Test");
 	}
 }
