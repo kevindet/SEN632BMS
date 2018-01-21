@@ -1,8 +1,9 @@
 package client;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Item {
+public class Item implements Serializable {
 	private String itemName;
 	private User borrower;
 	private User owner;
@@ -11,11 +12,10 @@ public class Item {
 	private Date borrowDate;
 	private Date returnDate;
 
-	public Item() {
-
+	public Item(String itemName, Category category) {
+		this.itemName = itemName;
+		this.category = category;
 	}
-	
-	
 
 	/**
 	 * @return the itemName
@@ -24,16 +24,13 @@ public class Item {
 		return itemName;
 	}
 
-
-
 	/**
-	 * @param itemName the itemName to set
+	 * @param itemName
+	 *            the itemName to set
 	 */
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-
-
 
 	/**
 	 * @return the borrower
@@ -42,16 +39,13 @@ public class Item {
 		return borrower;
 	}
 
-
-
 	/**
-	 * @param borrower the borrower to set
+	 * @param borrower
+	 *            the borrower to set
 	 */
 	public void setBorrower(User borrower) {
 		this.borrower = borrower;
 	}
-
-
 
 	/**
 	 * @return the owner
@@ -60,16 +54,13 @@ public class Item {
 		return owner;
 	}
 
-
-
 	/**
-	 * @param owner the owner to set
+	 * @param owner
+	 *            the owner to set
 	 */
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
-
-
 
 	/**
 	 * @return the category
@@ -78,16 +69,13 @@ public class Item {
 		return category;
 	}
 
-
-
 	/**
-	 * @param category the category to set
+	 * @param category
+	 *            the category to set
 	 */
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	
-
 
 	/**
 	 * @return the status
@@ -96,16 +84,13 @@ public class Item {
 		return status;
 	}
 
-
-
 	/**
-	 * @param status the status to set
+	 * @param status
+	 *            the status to set
 	 */
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-
-
 
 	/**
 	 * @return the borrowDate
@@ -114,16 +99,13 @@ public class Item {
 		return borrowDate;
 	}
 
-
-
 	/**
-	 * @param borrowDate the borrowDate to set
+	 * @param borrowDate
+	 *            the borrowDate to set
 	 */
 	public void setBorrowDate(Date borrowDate) {
 		this.borrowDate = borrowDate;
 	}
-
-
 
 	/**
 	 * @return the returnDate
@@ -132,16 +114,13 @@ public class Item {
 		return returnDate;
 	}
 
-
-
 	/**
-	 * @param returnDate the returnDate to set
+	 * @param returnDate
+	 *            the returnDate to set
 	 */
 	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
 	}
-
-
 
 	public void borrowItem(String itemName) {
 
@@ -149,6 +128,11 @@ public class Item {
 
 	public void lendItem(String itemName) {
 
+	}
+
+	public String toString() {
+		System.out.println(getItemName() + " " + getCategory());
+		return null;
 	}
 
 }
