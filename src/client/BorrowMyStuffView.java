@@ -5,7 +5,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.AbstractAction;
+import javax.swing.ButtonGroup;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -14,11 +18,15 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JToolBar;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
+
 
 
 public class BorrowMyStuffView extends JFrame {
@@ -36,6 +44,17 @@ public class BorrowMyStuffView extends JFrame {
     private JTable itemTable;
     private JScrollPane listScrollPane;
     private JPopupMenu popupMenu;
+    private JToolBar toolBar;
+    private JButton addItemButton;
+    private JButton editButton;
+    private JButton deleteButton;
+    private JButton searchButton;
+    private JRadioButton bookRadioButton;
+    private JRadioButton cdRadioButton;
+    private JRadioButton dvdRadioButton;
+    private ButtonGroup radioButtonGroup;
+    private JPanel radioButtonPanel;
+    //private TableColumnModel column = {"Name","Category","Status"};         
 
 	public BorrowMyStuffView(BorrowMyStuffClient client, ModelInterface model) {
 		super("Borrow My Stuff");
@@ -73,16 +92,110 @@ public class BorrowMyStuffView extends JFrame {
         
         
         setJMenuBar(menuBar);
+        
+        
+        
+        
+        
+        toolBar = new JToolBar();
 
-		JButton addButton = new JButton("Add Button");
+        Icon itemIcon = null;
+        Icon editIcon = null;
+        Icon searchIcon = null;
+        Icon deleteIcon = null;
+
+        try {
+            itemIcon = new ImageIcon(getClass().getResource("/images/book.jpg"));
+            editIcon = new ImageIcon(getClass().getResource("/images/edit.jpg"));
+            searchIcon = new ImageIcon(getClass().getResource(
+                    "/images/search.jpg"));
+            deleteIcon = new ImageIcon(getClass().getResource(
+                    "/images/delete.jpg"));
+        } catch (Exception e) {
+            System.out.println("Error could not load image icons");
+        }
+
+        
+        JButton addButton = new JButton(itemIcon);
 		addButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				item = new Item("Planet of the Apes", Category.MOVIE);
+				itemTable.getValueAt(itemTable.getSelectedRow(), 0);
+				//itemTable.getValueAt(itemTable.getSelectedRow(), 1);
+				itemTable.getValueAt(itemTable.getSelectedRow(), 2);
+				/*itemTable.getValueAt(itemTable.getSelectedRow(), 3);
+				itemTable.getValueAt(itemTable.getSelectedRow(), 4);
+				itemTable.getValueAt(itemTable.getSelectedRow(), 5);*/
+				item = new Item((String)itemTable.getValueAt(itemTable.getSelectedRow(), 0), (String)itemTable.getValueAt(itemTable.getSelectedRow(), 2));
+				//item = new Item("Planet of the Apes", Category.MOVIE);
 				item.toString();
 				client.send(item);
 			}
 		});
-		contentPanel.add(addButton);
+        
+        
+        
+        
+        addItemButton = new JButton(itemIcon);
+        toolBar.add(addItemButton);
+        addItemButton
+                .setToolTipText("Click this button to add a new book into inventory.");
+        addItemButton.addActionListener(new addAction("Add Item"));
+
+
+        toolBar.addSeparator();
+
+        searchButton = new JButton(searchIcon);
+        toolBar.add(searchButton);
+        searchButton
+                .setToolTipText("Click this button to search for an item from inventory.");
+        searchButton.addActionListener(new searchAction("Search"));
+
+        toolBar.addSeparator();
+
+        editButton = new JButton(editIcon);
+        toolBar.add(editButton);
+        editButton
+                .setToolTipText("Click this button to edit an item from inventory.");
+        editButton.addActionListener(new editAction("Edit"));
+
+        toolBar.addSeparator();
+
+        deleteButton = new JButton(deleteIcon);
+        toolBar.add(deleteButton);
+        deleteButton
+                .setToolTipText("Click this button to delete an item from inventory.");
+        deleteButton.addActionListener(new deleteAction("Delete"));
+
+        add(toolBar, BorderLayout.NORTH);
+
+        contentPanel = new JPanel(new BorderLayout());
+
+        add(contentPanel);
+        radioButtonPanel = new JPanel();
+
+        /*bookRadioButton = new JRadioButton(new radioButtonAction("BOOK"));
+        bookRadioButton.setSelected(true);
+        cdRadioButton = new JRadioButton(new radioButtonAction("CD"));
+        dvdRadioButton = new JRadioButton(new radioButtonAction("DVD"));
+        radioButtonGroup = new ButtonGroup();
+        radioButtonGroup.add(bookRadioButton);
+        radioButtonGroup.add(cdRadioButton);
+        radioButtonGroup.add(dvdRadioButton);
+        radioButtonPanel.add(bookRadioButton);
+        radioButtonPanel.add(cdRadioButton);
+        radioButtonPanel.add(dvdRadioButton);
+        contentPanel.add(radioButtonPanel, BorderLayout.NORTH);*/
+        
+        
+        
+        
+        
+        
+        
+        
+
+		
+		//contentPanel.add(addButton);
 		
 		
 		
@@ -94,6 +207,9 @@ public class BorrowMyStuffView extends JFrame {
             }
         };
 
+        
+        
+        
         itemTable.setAutoCreateRowSorter(true);
         itemTable.setComponentPopupMenu(popupMenu);
         enableComponents(false);
@@ -141,7 +257,16 @@ public class BorrowMyStuffView extends JFrame {
         }
 
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Add Menu Item Clicked");
+        	itemTable.getValueAt(itemTable.getSelectedRow(), 0);
+			//itemTable.getValueAt(itemTable.getSelectedRow(), 1);
+			itemTable.getValueAt(itemTable.getSelectedRow(), 2);
+			/*itemTable.getValueAt(itemTable.getSelectedRow(), 3);
+			itemTable.getValueAt(itemTable.getSelectedRow(), 4);
+			itemTable.getValueAt(itemTable.getSelectedRow(), 5);*/
+			item = new Item((String)itemTable.getValueAt(itemTable.getSelectedRow(), 0), (String)itemTable.getValueAt(itemTable.getSelectedRow(), 2));
+			//item = new Item("Planet of the Apes", Category.MOVIE);
+			item.toString();
+			client.send(item);
         }
     }
 	

@@ -7,12 +7,12 @@ public class Item implements Serializable {
 	private String itemName;
 	private User borrower;
 	private User owner;
-	private Category category;
+	private String category;
 	private Status status;
 	private Date borrowDate;
 	private Date returnDate;
 
-	public Item(String itemName, Category category) {
+	public Item(String itemName, String category) {
 		this.itemName = itemName;
 		this.category = category;
 	}
@@ -65,7 +65,7 @@ public class Item implements Serializable {
 	/**
 	 * @return the category
 	 */
-	public Category getCategory() {
+	public String getCategory() {
 		return category;
 	}
 
@@ -73,7 +73,7 @@ public class Item implements Serializable {
 	 * @param category
 	 *            the category to set
 	 */
-	public void setCategory(Category category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
 

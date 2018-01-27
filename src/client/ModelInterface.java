@@ -8,5 +8,4 @@ public interface ModelInterface {
 
     public Object getValueAt(int row, int column);
 
-    public void disconnectFromDatabase();
 }
