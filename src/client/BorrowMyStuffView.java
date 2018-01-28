@@ -16,13 +16,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 public class BorrowMyStuffView extends JFrame {
@@ -32,7 +30,8 @@ public class BorrowMyStuffView extends JFrame {
 	private JPanel contentPanel = new JPanel();
 	private Item item;
 	private JMenuItem addMenuItem;
-	private JMenuItem searchMenuItem;
+	private JMenuItem borrowMenuItem;
+	private JMenuItem returnMenuItem;
 	private JMenuItem editMenuItem;
 	private JMenuItem deleteMenuItem;
 	private JMenuItem exitMenuItem;
@@ -44,7 +43,8 @@ public class BorrowMyStuffView extends JFrame {
 	private JButton addItemButton;
 	private JButton editButton;
 	private JButton deleteButton;
-	private JButton searchButton;
+	private JButton borrowButton;
+	private JButton returnButton;
 
 	public BorrowMyStuffView(BorrowMyStuffClient client, ModelInterface model) {
 		super("Borrow My Stuff");
@@ -53,31 +53,23 @@ public class BorrowMyStuffView extends JFrame {
 		this.add(contentPanel);
 		JMenuBar menuBar = new JMenuBar();
 		JMenu fileMenu = new JMenu("File");
-		fileMenu.setMnemonic('F');
 		JMenu editMenu = new JMenu("Edit");
-		editMenu.setMnemonic('E');
 		JMenu helpMenu = new JMenu("Help");
-		helpMenu.setMnemonic('H');
 		menuBar.add(fileMenu);
 		menuBar.add(editMenu);
 		menuBar.add(helpMenu);
 
 		addMenuItem = fileMenu.add(new addAction("Add Item"));
-		addMenuItem.setMnemonic('I');
 
 		fileMenu.addSeparator();
 
-		searchMenuItem = fileMenu.add(new searchAction("Search"));
-		searchMenuItem.setMnemonic('S');
+		borrowMenuItem = fileMenu.add(new borrowAction("Borrow"));
+		returnMenuItem = fileMenu.add(new returnAction("Return"));
 		fileMenu.addSeparator();
 		exitMenuItem = fileMenu.add(new exitAction("Exit"));
-		exitMenuItem.setMnemonic('E');
 		editMenuItem = editMenu.add(new editAction("Edit"));
-		editMenuItem.setMnemonic('E');
 		deleteMenuItem = editMenu.add(new deleteAction("Delete"));
-		deleteMenuItem.setMnemonic('D');
 		aboutMenuItem = helpMenu.add(new aboutAction("About"));
-		aboutMenuItem.setMnemonic('A');
 
 		setJMenuBar(menuBar);
 
@@ -85,14 +77,17 @@ public class BorrowMyStuffView extends JFrame {
 
 		Icon itemIcon = null;
 		Icon editIcon = null;
-		Icon searchIcon = null;
+		Icon borrowIcon = null;
 		Icon deleteIcon = null;
+		Icon returnIcon = null;
 
 		try {
 			itemIcon = new ImageIcon(getClass().getResource("/images/book.jpg"));
 			editIcon = new ImageIcon(getClass().getResource("/images/edit.jpg"));
-			searchIcon = new ImageIcon(getClass().getResource(
-					"/images/search.jpg"));
+			borrowIcon = new ImageIcon(getClass().getResource(
+					"/images/borrow.png"));
+			returnIcon = new ImageIcon(getClass().getResource(
+					"/images/return.png"));
 			deleteIcon = new ImageIcon(getClass().getResource(
 					"/images/delete.jpg"));
 		} catch (Exception e) {
@@ -107,11 +102,17 @@ public class BorrowMyStuffView extends JFrame {
 
 		toolBar.addSeparator();
 
-		searchButton = new JButton(searchIcon);
-		toolBar.add(searchButton);
-		searchButton
-				.setToolTipText("Click this button to search for an item from inventory.");
-		searchButton.addActionListener(new searchAction("Search"));
+		borrowButton = new JButton(borrowIcon);
+		toolBar.add(borrowButton);
+		borrowButton
+				.setToolTipText("Click this button to borrow an item from inventory.");
+		borrowButton.addActionListener(new borrowAction("Borrow"));
+
+		returnButton = new JButton(returnIcon);
+		toolBar.add(returnButton);
+		returnButton
+				.setToolTipText("Click this button to return an item to inventory.");
+		returnButton.addActionListener(new returnAction("Return"));
 
 		toolBar.addSeparator();
 
@@ -201,17 +202,31 @@ public class BorrowMyStuffView extends JFrame {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-
+			System.out.println("Item Edited");
 		}
 	}
 
-	private class searchAction extends AbstractAction {
-		public searchAction(String name) {
+	private class borrowAction extends AbstractAction {
+		public borrowAction(String name) {
 			super(name);
 		}
 
 		public void actionPerformed(ActionEvent e) {
+			BorrowItemDialog borrowItemDialog = new BorrowItemDialog (BorrowMyStuffView.this, model,itemTable.getSelectedRow());
+			borrowItemDialog.setVisible(true);
+			System.out.println("Item Borrowed");
+		}
+	}
+	
+	private class returnAction extends AbstractAction {
+		public returnAction(String name) {
+			super(name);
+		}
 
+		public void actionPerformed(ActionEvent e) {
+			ReturnItemDialog returnItemDialog = new ReturnItemDialog (BorrowMyStuffView.this, model,itemTable.getSelectedRow());
+			returnItemDialog.setVisible(true);
+			System.out.println("Item Returned");
 		}
 	}
 
@@ -221,7 +236,7 @@ public class BorrowMyStuffView extends JFrame {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-
+			System.out.println("Item Deleted");
 		}
 	}
 

@@ -1,6 +1,7 @@
 package client;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -86,6 +87,18 @@ public class ClientModel extends AbstractTableModel implements ModelInterface {
 	@Override
 	public int getColumnCount() {
 		return columnNames.length;
+	}
+	
+	public void borrowItem(int i, String borrower, String borrowDate) {
+		data[i][3]= "Unavailable";
+		data[i][4]= borrower;
+		data[i][5]= borrowDate;
+		data[i][6]= "";
+	}
+	
+	public void returnItem(int i, String returnDate) {
+		data[i][3]= "Available";
+		data[i][6]= returnDate;
 	}
 
 }
