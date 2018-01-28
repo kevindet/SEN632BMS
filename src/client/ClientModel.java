@@ -19,17 +19,18 @@ public class ClientModel extends AbstractTableModel implements ModelInterface {
 	
 	private Object[][] data = new Object [100][7];
 	private int i=0;
+	private BorrowMyStuffClient client;
 	
-	public ClientModel() {
-		
-		data[i][0]= "Gremins";
+	public ClientModel(BorrowMyStuffClient client) {
+		this.client = client;
+		/*data[i][0]= "Gremins";
 		data[i][1]= "Gremins";
 		data[i][2]= "Gremins";
 		data[i][3]= "Gremins";
 		data[i][4]= "Gremins";
 		data[i][5]= "Gremins";
 		data[i][6]= "Gremins";
-		i++;
+		i++;*/
 		/*data[1][0]= "Gremins2";
 		data[1][1]= "Gremins2";
 		data[1][2]= "Gremins2";
@@ -41,15 +42,17 @@ public class ClientModel extends AbstractTableModel implements ModelInterface {
 	}
 
 	@Override
-	public void addItem(){
-		data[i][0]= "Gremins" + i;
-		data[i][1]= "Gremins" + i;
-		data[i][2]= "Gremins" + i;
-		data[i][3]= "Gremins" + i;
-		data[i][4]= "Gremins" + i;
-		data[i][5]= "Gremins" + i;
-		data[i][6]= "Gremins" + i;
-		i++;	
+	public void addItem(String itemName, String owner, String category, String status){
+		data[i][0]= itemName;
+		data[i][1]= owner;
+		data[i][2]= category;
+		data[i][3]= status;
+		data[i][4]= "";
+		data[i][5]= "";
+		data[i][6]= "";	
+		Item item = new Item(itemName,category);
+		client.send(item);
+		i++;
 	}
 	
 	@Override

@@ -8,7 +8,7 @@ public interface ModelInterface {
 
     public Object getValueAt(int row, int column);
     
-    public void addItem();
+    public void addItem(String itemName, String owner, String category, String status);
     
     public void fireTableDataChanged();
 

@@ -8,6 +8,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -183,13 +184,13 @@ public class BorrowMyStuffView extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			
 			
-			
+			AddItemDialog addItemDialog = new AddItemDialog (BorrowMyStuffView.this, model);
+			addItemDialog.setVisible(true);
 			item = new Item(
 					(String) itemTable.getValueAt(itemTable.getSelectedRow(), 0),
 					(String) itemTable.getValueAt(itemTable.getSelectedRow(), 2));
 			item.toString();
-			client.send(item);
-			model.addItem();
+			//client.send(item);
 			model.fireTableDataChanged();
 		}
 	}
