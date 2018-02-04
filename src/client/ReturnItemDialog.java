@@ -26,7 +26,7 @@ public class ReturnItemDialog extends JDialog{
 	private TitledBorder titledTextField1;
 	private JButton button1;
 	
-	public ReturnItemDialog(JFrame owner, final ModelInterface model, int row) {
+	public ReturnItemDialog(JFrame owner, final ClientModel model, int row) {
 
 		super(owner, true);
 		this.owner = owner;

@@ -26,7 +26,7 @@ import javax.swing.table.TableModel;
 public class BorrowMyStuffView extends JFrame {
 
 	private BorrowMyStuffClient client;
-	private ModelInterface model;
+	private ClientModel model;
 	private JPanel contentPanel = new JPanel();
 	private Item item;
 	private JMenuItem addMenuItem;
@@ -46,7 +46,7 @@ public class BorrowMyStuffView extends JFrame {
 	private JButton borrowButton;
 	private JButton returnButton;
 
-	public BorrowMyStuffView(BorrowMyStuffClient client, ModelInterface model) {
+	public BorrowMyStuffView(BorrowMyStuffClient client, ClientModel model) {
 		super("Borrow My Stuff");
 		this.model=model;
 		this.client = client;
@@ -237,6 +237,7 @@ public class BorrowMyStuffView extends JFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Item Deleted");
+			model.removeItem(itemTable.getSelectedRow());
 		}
 	}
 

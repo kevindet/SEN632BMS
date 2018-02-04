@@ -9,6 +9,11 @@ public class User {
 	private int DateEntered;
 	private String password;
 	
+	public User(String Fname, String password) {
+		this.Fname = Fname;
+		this.password = password;
+	}
+	
 	
 	public int getID(){
 		return this.Id;

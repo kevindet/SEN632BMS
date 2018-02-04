@@ -30,7 +30,7 @@ public class BorrowItemDialog extends JDialog {
 	private TitledBorder titledTextField2;
 	private JButton button1;
 
-	public BorrowItemDialog(JFrame owner, final ModelInterface model, int row) {
+	public BorrowItemDialog(JFrame owner, final ClientModel model, int row) {
 
 		super(owner, true);
 		this.owner = owner;

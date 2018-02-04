@@ -8,9 +8,9 @@ public class ClientApp {
 	public static void main(String[] args) {
 		BorrowMyStuffClient client = new BorrowMyStuffClient();
 		client.start();
-		ModelInterface model = new ClientModel(client);
+		ClientModel model = new ClientModel(client);
 		BorrowMyStuffView view = new BorrowMyStuffView(client, model);
-		LoginDialog login = new LoginDialog(view);
+		LoginDialog login = new LoginDialog(view, client);
 
 		view.setPreferredSize(new Dimension(600, 500));
 		view.setSize(800, 700);

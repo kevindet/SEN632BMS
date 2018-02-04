@@ -84,6 +84,13 @@ public class BorrowMyStuffClient extends Thread {
 		request = r;
 		newRequest = true;
 	}
+	
+	public boolean send(User u) {
+		request = u;
+		newRequest = true;
+		return true;
+	}
+
 
 	// public void setView(MessageView view) { this.view=view; }
 

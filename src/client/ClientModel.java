@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.swing.table.AbstractTableModel;
 
-public class ClientModel extends AbstractTableModel implements ModelInterface {
+public class ClientModel extends AbstractTableModel{
 
 	private String[] columnNames = { "Item Name", "Owner", "Category",
 	        "Status", "Borrower", "Borrowed Date", "Returned Date" };
@@ -42,7 +42,6 @@ public class ClientModel extends AbstractTableModel implements ModelInterface {
 	
 	}
 
-	@Override
 	public void addItem(String itemName, String owner, String category, String status){
 		data[i][0]= itemName;
 		data[i][1]= owner;
@@ -56,19 +55,30 @@ public class ClientModel extends AbstractTableModel implements ModelInterface {
 		i++;
 	}
 	
-	@Override
+
 	public Item getItem() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public void removeItem() {
-		// TODO Auto-generated method stub
+
+	public void removeItem(int i) {
+		Item item = new Item((String)data[i][0], (String)data[i][2]);
+		data[i][0]= "";
+		data[i][1]= "";
+		data[i][2]= "";
+		data[i][3]= "";
+		data[i][4]= "";
+		data[i][5]= "";
+		data[i][6]= "";	
+		
+		
+		client.send(item);
+		i--;
 
 	}
 
-	@Override
+
 	public Object getValueAt(int row, int column) {
 		return data[row][column];
 		//return data2.get(row).get(column);
@@ -78,13 +88,12 @@ public class ClientModel extends AbstractTableModel implements ModelInterface {
 		return columnNames[col];
 	}
 
-	@Override
 	public int getRowCount() {
 		return data.length;
 		//return data2.size();
 	}
 
-	@Override
+
 	public int getColumnCount() {
 		return columnNames.length;
 	}

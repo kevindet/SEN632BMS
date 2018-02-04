@@ -32,7 +32,7 @@ public class LoginDialog extends JFrame {
 	private JTextField passwordField;
 	private boolean loggedIn = false;
 
-	public LoginDialog(JFrame parent) {
+	public LoginDialog(JFrame parent, BorrowMyStuffClient client) {
 		super("Enter User Credentials");
 		//parent.setEnabled(false);
 		//parent.setFocusable(false);
@@ -58,13 +58,16 @@ public class LoginDialog extends JFrame {
 				userName = userField.getText();
 				password = passwordField.getText();
 				
+				User user = new User(userName, password);
+				loggedIn= client.send(user);
 				
-				
-				loggedIn = true;
-				System.out.println(loggedIn);
+
+
+				if(loggedIn) {
 				LoginDialog.this.setVisible(false);
 				//parent.setEnabled(true);
 				parent.setVisible(true);
+				}
 				
 			}
 		});

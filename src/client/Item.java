@@ -8,7 +8,7 @@ public class Item implements Serializable {
 	private User borrower;
 	private User owner;
 	private String category;
-	private Status status;
+	private String status;
 	private Date borrowDate;
 	private Date returnDate;
 
@@ -80,7 +80,7 @@ public class Item implements Serializable {
 	/**
 	 * @return the status
 	 */
-	public Status getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
@@ -88,7 +88,7 @@ public class Item implements Serializable {
 	 * @param status
 	 *            the status to set
 	 */
-	public void setStatus(Status status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

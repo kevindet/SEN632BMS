@@ -28,7 +28,7 @@ public class AddItemDialog extends JDialog {
 	private TitledBorder titledTextField4;
 	private JButton button1;
 
-	public AddItemDialog(JFrame owner, final ModelInterface model) {
+	public AddItemDialog(JFrame owner, final ClientModel model) {
 
 		super(owner, true);
 		this.owner = owner;
