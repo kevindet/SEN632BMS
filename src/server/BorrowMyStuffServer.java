@@ -67,8 +67,8 @@ public class BorrowMyStuffServer extends Thread {
 	public void getConnection() throws IOException, ClassNotFoundException {
 		if (socketList[0] == null) {
 			//get localhost IP
-			InetAddress ip = InetAddress.getLocalHost();
-			System.out.println("Server running on : " + ip.getHostAddress());
+			//InetAddress ip = InetAddress.getLocalHost();
+			//System.out.println("Server running on : " + ip.getHostAddress());
 			//
 			
 			System.out.println("Waiting for client on port "
@@ -95,7 +95,7 @@ public class BorrowMyStuffServer extends Thread {
 			Thread t = new BorrowMyStuffServer(port);
 			t.start();
 			
-			DatabaseConnection.initialize();
+			//DatabaseConnection.initialize();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
