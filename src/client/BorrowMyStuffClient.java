@@ -33,7 +33,7 @@ public class BorrowMyStuffClient extends Thread {
 					System.out.println(running);
 
 				} catch (Exception e) {
-					System.out.println("Trying to connect");
+					//System.out.println("Trying to connect");
 
 				}
 			}
